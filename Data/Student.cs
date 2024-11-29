@@ -12,4 +12,6 @@ public partial class Student
     public string LastName { get; set; } = null!;
 
     public DateOnly? DataOfBirth { get; set; }
+
+    public virtual ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 }

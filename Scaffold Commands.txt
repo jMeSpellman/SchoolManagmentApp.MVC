@@ -1,0 +1,14 @@
+dotnet ef dbcontext scaffold 'Server=localhost\sqlexpress;Database=SchoolManagementDb;Trusted_Connection=true;MultipleActiveResultSets=true;Encrypt=false;' Microsoft.EntityFrameworkCore.SqlServer -o Data -f --no-onconfiguring
+
+
+dotnet aspnet-codegenerator controller -name CoursesController -m Course -dc SchoolManagementDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f 
+
+dotnet aspnet-codegenerator controller -name LecturersController -m Lecturer -dc SchoolManagementDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+
+dotnet aspnet-codegenerator controller -name StudentsController -m Student -dc SchoolManagementDbContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries -f
+
+
+
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+dotnet add package Microsoft.EntityFrameworkCore.Design
+dotnet add package Microsoft.EntityFrameworkCore.Tools
