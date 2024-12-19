@@ -32,8 +32,7 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
-            var lecturer = await _context.Lecturers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var lecturer = await _context.Lecturers.FirstOrDefaultAsync(m => m.Id == id);
             if (lecturer == null)
             {
                 return NotFound();
@@ -85,7 +84,10 @@ namespace SchoolManagmentApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName")] Lecturer lecturer)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("Id,FirstName,LastName")] Lecturer lecturer
+        )
         {
             if (id != lecturer.Id)
             {
@@ -123,8 +125,7 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
-            var lecturer = await _context.Lecturers
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var lecturer = await _context.Lecturers.FirstOrDefaultAsync(m => m.Id == id);
             if (lecturer == null)
             {
                 return NotFound();

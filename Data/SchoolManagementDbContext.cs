@@ -7,9 +7,7 @@ namespace SchoolManagmentApp.MVC.Data;
 public partial class SchoolManagementDbContext : DbContext
 {
     public SchoolManagementDbContext(DbContextOptions<SchoolManagementDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<Class> Classes { get; set; }
 
@@ -27,11 +25,15 @@ public partial class SchoolManagementDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Classes__3214EC0707CE88D4");
 
-            entity.HasOne(d => d.Course).WithMany(p => p.Classes)
+            entity
+                .HasOne(d => d.Course)
+                .WithMany(p => p.Classes)
                 .HasForeignKey(d => d.CourseId)
                 .HasConstraintName("FK__Classes__CourseI__4AB81AF0");
 
-            entity.HasOne(d => d.Lecturer).WithMany(p => p.Classes)
+            entity
+                .HasOne(d => d.Lecturer)
+                .WithMany(p => p.Classes)
                 .HasForeignKey(d => d.LecturerId)
                 .HasConstraintName("FK__Classes__Lecture__49C3F6B7");
         });
@@ -52,11 +54,15 @@ public partial class SchoolManagementDbContext : DbContext
 
             entity.Property(e => e.Grade).HasMaxLength(2);
 
-            entity.HasOne(d => d.Class).WithMany(p => p.Enrollments)
+            entity
+                .HasOne(d => d.Class)
+                .WithMany(p => p.Enrollments)
                 .HasForeignKey(d => d.ClassId)
                 .HasConstraintName("FK__Enrollmen__Class__4E88ABD4");
 
-            entity.HasOne(d => d.Student).WithMany(p => p.Enrollments)
+            entity
+                .HasOne(d => d.Student)
+                .WithMany(p => p.Enrollments)
                 .HasForeignKey(d => d.StudentId)
                 .HasConstraintName("FK__Enrollmen__Stude__4D94879B");
         });

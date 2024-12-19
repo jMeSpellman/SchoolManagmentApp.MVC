@@ -21,7 +21,9 @@ namespace SchoolManagmentApp.MVC.Controllers
         // GET: Enrollments
         public async Task<IActionResult> Index()
         {
-            var schoolManagementDbContext = _context.Enrollments.Include(e => e.Class).Include(e => e.Student);
+            var schoolManagementDbContext = _context
+                .Enrollments.Include(e => e.Class)
+                .Include(e => e.Student);
             return View(await schoolManagementDbContext.ToListAsync());
         }
 
@@ -33,8 +35,8 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
-            var enrollment = await _context.Enrollments
-                .Include(e => e.Class)
+            var enrollment = await _context
+                .Enrollments.Include(e => e.Class)
                 .Include(e => e.Student)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (enrollment == null)
@@ -58,7 +60,9 @@ namespace SchoolManagmentApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,ClassId,Grade")] Enrollment enrollment)
+        public async Task<IActionResult> Create(
+            [Bind("Id,StudentId,ClassId,Grade")] Enrollment enrollment
+        )
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +71,12 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", enrollment.ClassId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
+            ViewData["StudentId"] = new SelectList(
+                _context.Students,
+                "Id",
+                "Id",
+                enrollment.StudentId
+            );
             return View(enrollment);
         }
 
@@ -85,7 +94,12 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
             ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", enrollment.ClassId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
+            ViewData["StudentId"] = new SelectList(
+                _context.Students,
+                "Id",
+                "Id",
+                enrollment.StudentId
+            );
             return View(enrollment);
         }
 
@@ -94,7 +108,10 @@ namespace SchoolManagmentApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,ClassId,Grade")] Enrollment enrollment)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("Id,StudentId,ClassId,Grade")] Enrollment enrollment
+        )
         {
             if (id != enrollment.Id)
             {
@@ -122,7 +139,12 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClassId"] = new SelectList(_context.Classes, "Id", "Id", enrollment.ClassId);
-            ViewData["StudentId"] = new SelectList(_context.Students, "Id", "Id", enrollment.StudentId);
+            ViewData["StudentId"] = new SelectList(
+                _context.Students,
+                "Id",
+                "Id",
+                enrollment.StudentId
+            );
             return View(enrollment);
         }
 
@@ -134,8 +156,8 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
-            var enrollment = await _context.Enrollments
-                .Include(e => e.Class)
+            var enrollment = await _context
+                .Enrollments.Include(e => e.Class)
                 .Include(e => e.Student)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (enrollment == null)

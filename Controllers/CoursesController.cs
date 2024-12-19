@@ -22,6 +22,8 @@ namespace SchoolManagmentApp.MVC.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
+            // SELECT *
+            // FROM Courses
             return View(await _context.Courses.ToListAsync());
             /* version 7.0
                 return _context.Courses != null ?
@@ -38,6 +40,9 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
+            // SELECT *
+            // FROM Courses
+            // WHERE Courses.Id == Id
             var course = await _context.Courses.FirstOrDefaultAsync(m => m.Id == id);
             if (course == null)
             {

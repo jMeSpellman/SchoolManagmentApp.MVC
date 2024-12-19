@@ -32,8 +32,7 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {
                 return NotFound();
@@ -53,7 +52,9 @@ namespace SchoolManagmentApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,DataOfBirth")] Student student)
+        public async Task<IActionResult> Create(
+            [Bind("Id,FirstName,LastName,DataOfBirth")] Student student
+        )
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +86,10 @@ namespace SchoolManagmentApp.MVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,DataOfBirth")] Student student)
+        public async Task<IActionResult> Edit(
+            int id,
+            [Bind("Id,FirstName,LastName,DataOfBirth")] Student student
+        )
         {
             if (id != student.Id)
             {
@@ -123,8 +127,7 @@ namespace SchoolManagmentApp.MVC.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var student = await _context.Students.FirstOrDefaultAsync(m => m.Id == id);
             if (student == null)
             {
                 return NotFound();
